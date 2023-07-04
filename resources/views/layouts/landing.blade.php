@@ -19,6 +19,7 @@
     </div>
 
 
+    @if(Route::currentRouteName() !== 'login')
     <div class="container-fluid bg-dark px-5 d-none d-lg-block">
         <div class="row gx-0">
             <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
@@ -61,15 +62,17 @@
                         </div>
                     </div>
                     <div class="nav-item d-flex align-items-center ms-5">
-                        <a class="btn btn-primary">Masuk</a>
+                        <a class="btn btn-primary" href="{{ route('login') }}">Masuk</a>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
+    @endif
 
     @yield('content')
 
+    @if(Route::currentRouteName() !== 'login')
     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
@@ -110,6 +113,7 @@
     </div>
 
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+    @endif
 
     @include('includes.landing_script')
     @stack('landing_script')
