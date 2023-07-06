@@ -19,7 +19,7 @@
     </div>
 
 
-    @if(Route::currentRouteName() !== 'login')
+    @if(Route::currentRouteName() === 'landing')
     <div class="container-fluid bg-dark px-5 d-none d-lg-block">
         <div class="row gx-0">
             <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
@@ -57,7 +57,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pelayanan</a>
                         <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pengajuan Surat</a>
+                            <a href="{{ route('public.pengajuan') }}" class="dropdown-item">Pengajuan Surat</a>
                             <a href="feature.html" class="dropdown-item">Pengaduan</a>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
 
     @yield('content')
 
-    @if(Route::currentRouteName() !== 'login')
+    @if(Route::currentRouteName() === 'landing')
     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
