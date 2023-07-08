@@ -1,132 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/landing.js":
-/*!*********************************!*\
-  !*** ./resources/js/landing.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-/* provided dependency */ var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-(function ($, _$$owlCarousel) {
-  "use strict";
-
-  // Spinner
-  var spinner = function spinner() {
-    setTimeout(function () {
-      if ($('#spinner').length > 0) {
-        $('#spinner').removeClass('show');
-      }
-    }, 1);
-  };
-  spinner();
-
-  // Initiate the wowjs
-  new WOW().init();
-
-  // Sticky Navbar
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 45) {
-      $('.navbar').addClass('sticky-top shadow-sm');
-    } else {
-      $('.navbar').removeClass('sticky-top shadow-sm');
-    }
-  });
-
-  // Dropdown on mouse hover
-  var $dropdown = $(".dropdown");
-  var $dropdownToggle = $(".dropdown-toggle");
-  var $dropdownMenu = $(".dropdown-menu");
-  var showClass = "show";
-  $(window).on("load resize", function () {
-    if (this.matchMedia("(min-width: 992px)").matches) {
-      $dropdown.hover(function () {
-        var $this = $(this);
-        $this.addClass(showClass);
-        $this.find($dropdownToggle).attr("aria-expanded", "true");
-        $this.find($dropdownMenu).addClass(showClass);
-      }, function () {
-        var $this = $(this);
-        $this.removeClass(showClass);
-        $this.find($dropdownToggle).attr("aria-expanded", "false");
-        $this.find($dropdownMenu).removeClass(showClass);
-      });
-    } else {
-      $dropdown.off("mouseenter mouseleave");
-    }
-  });
-
-  // Facts counter
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 2000
-  });
-
-  // Back to top button
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 100) {
-      $('.back-to-top').fadeIn('slow');
-    } else {
-      $('.back-to-top').fadeOut('slow');
-    }
-  });
-  $('.back-to-top').click(function () {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 1500, 'easeInOutExpo');
-    return false;
-  });
-
-  // Testimonials carousel
-  $(".testimonial-carousel").owlCarousel({
-    autoplay: true,
-    smartSpeed: 1500,
-    dots: true,
-    loop: true,
-    center: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      576: {
-        items: 1
-      },
-      768: {
-        items: 2
-      },
-      992: {
-        items: 3
-      }
-    }
-  });
-
-  // Vendor carousel
-  $('.vendor-carousel').owlCarousel((_$$owlCarousel = {
-    loop: true,
-    margin: 45,
-    dots: false
-  }, _defineProperty(_$$owlCarousel, "loop", true), _defineProperty(_$$owlCarousel, "autoplay", true), _defineProperty(_$$owlCarousel, "smartSpeed", 1000), _defineProperty(_$$owlCarousel, "responsive", {
-    0: {
-      items: 2
-    },
-    576: {
-      items: 4
-    },
-    768: {
-      items: 6
-    },
-    992: {
-      items: 8
-    }
-  }), _$$owlCarousel));
-})(jQuery);
-
-/***/ }),
-
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -10840,32 +10714,6 @@ return jQuery;
 } );
 
 
-/***/ }),
-
-/***/ "./resources/css/landing.scss":
-/*!************************************!*\
-  !*** ./resources/css/landing.scss ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/css/dashboard.scss":
-/*!**************************************!*\
-  !*** ./resources/css/dashboard.scss ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
 /***/ })
 
 /******/ 	});
@@ -10894,122 +10742,188 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/assets/js/landing": 0,
-/******/ 			"assets/css/dashboard": 0,
-/******/ 			"assets/css/landing": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["assets/css/dashboard","assets/css/landing"], () => (__webpack_require__("./resources/js/landing.js")))
-/******/ 	__webpack_require__.O(undefined, ["assets/css/dashboard","assets/css/landing"], () => (__webpack_require__("./resources/css/landing.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["assets/css/dashboard","assets/css/landing"], () => (__webpack_require__("./resources/css/dashboard.scss")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!***********************************!*\
+  !*** ./resources/js/dashboard.js ***!
+  \***********************************/
+/* provided dependency */ var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+(function ($) {
+  "use strict";
+
+  // Spinner
+  var spinner = function spinner() {
+    setTimeout(function () {
+      if ($('#spinner').length > 0) {
+        $('#spinner').removeClass('show');
+      }
+    }, 1);
+  };
+  spinner();
+
+  // Back to top button
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+  });
+  $('.back-to-top').click(function () {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 1500, 'easeInOutExpo');
+    return false;
+  });
+
+  // Sidebar Toggler
+  $('.sidebar-toggler').click(function () {
+    $('.sidebar, .content').toggleClass("open");
+    return false;
+  });
+
+  // Progress Bar
+  $('.pg-bar').waypoint(function () {
+    $('.progress .progress-bar').each(function () {
+      $(this).css("width", $(this).attr("aria-valuenow") + '%');
+    });
+  }, {
+    offset: '80%'
+  });
+
+  // Calender
+  $('#calender').datetimepicker({
+    inline: true,
+    format: 'L'
+  });
+
+  // Testimonials carousel
+  $(".testimonial-carousel").owlCarousel({
+    autoplay: true,
+    smartSpeed: 1000,
+    items: 1,
+    dots: true,
+    loop: true,
+    nav: false
+  });
+
+  // Worldwide Sales Chart
+  var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+  var myChart1 = new Chart(ctx1, {
+    type: "bar",
+    data: {
+      labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+      datasets: [{
+        label: "USA",
+        data: [15, 30, 55, 65, 60, 80, 95],
+        backgroundColor: "rgba(0, 156, 255, .7)"
+      }, {
+        label: "UK",
+        data: [8, 35, 40, 60, 70, 55, 75],
+        backgroundColor: "rgba(0, 156, 255, .5)"
+      }, {
+        label: "AU",
+        data: [12, 25, 45, 55, 65, 70, 60],
+        backgroundColor: "rgba(0, 156, 255, .3)"
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+  // Salse & Revenue Chart
+  var ctx2 = $("#salse-revenue").get(0).getContext("2d");
+  var myChart2 = new Chart(ctx2, {
+    type: "line",
+    data: {
+      labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+      datasets: [{
+        label: "Salse",
+        data: [15, 30, 55, 45, 70, 65, 85],
+        backgroundColor: "rgba(0, 156, 255, .5)",
+        fill: true
+      }, {
+        label: "Revenue",
+        data: [99, 135, 170, 130, 190, 180, 270],
+        backgroundColor: "rgba(0, 156, 255, .3)",
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+  // Single Line Chart
+  var ctx3 = $("#line-chart").get(0).getContext("2d");
+  var myChart3 = new Chart(ctx3, {
+    type: "line",
+    data: {
+      labels: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+      datasets: [{
+        label: "Salse",
+        fill: false,
+        backgroundColor: "rgba(0, 156, 255, .3)",
+        data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+  // Single Bar Chart
+  var ctx4 = $("#bar-chart").get(0).getContext("2d");
+  var myChart4 = new Chart(ctx4, {
+    type: "bar",
+    data: {
+      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+      datasets: [{
+        backgroundColor: ["rgba(0, 156, 255, .7)", "rgba(0, 156, 255, .6)", "rgba(0, 156, 255, .5)", "rgba(0, 156, 255, .4)", "rgba(0, 156, 255, .3)"],
+        data: [55, 49, 44, 24, 15]
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+  // Pie Chart
+  var ctx5 = $("#pie-chart").get(0).getContext("2d");
+  var myChart5 = new Chart(ctx5, {
+    type: "pie",
+    data: {
+      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+      datasets: [{
+        backgroundColor: ["rgba(0, 156, 255, .7)", "rgba(0, 156, 255, .6)", "rgba(0, 156, 255, .5)", "rgba(0, 156, 255, .4)", "rgba(0, 156, 255, .3)"],
+        data: [55, 49, 44, 24, 15]
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+  // Doughnut Chart
+  var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+  var myChart6 = new Chart(ctx6, {
+    type: "doughnut",
+    data: {
+      labels: ["Italy", "France", "Spain", "USA", "Argentina"],
+      datasets: [{
+        backgroundColor: ["rgba(0, 156, 255, .7)", "rgba(0, 156, 255, .6)", "rgba(0, 156, 255, .5)", "rgba(0, 156, 255, .4)", "rgba(0, 156, 255, .3)"],
+        data: [55, 49, 44, 24, 15]
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+})(jQuery);
+})();
+
 /******/ })()
 ;

@@ -27,6 +27,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::group(['middleware' => ['guest']], function () {
         Route::get('/login', 'UserController@index')->name('login');
         Route::post('/auth/login', 'UserController@login')->name('auth.login');
+        Route::post('/auth/logout', 'UserController@logout')->name('auth.logout');
     });
 
     Route::group(['middleware' => ['auth']], function () {

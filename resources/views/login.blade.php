@@ -1,9 +1,10 @@
 @extends('layouts.landing')
 @section('content')
+@section('title-page', 'Pemerintahan Desa Ciomas')
 <section class="wrapper">
     <div class="container-fluid">
         <div class="container">
-            <div class="card overflow-hidden mx-auto" style="max-width: 350px;">
+            <div class="card overflow-hidden mx-auto mt-5" style="max-width: 350px;">
                 <div class="card-body">
                     <div class="w-100 d-flex justify-content-center align-items-center mb-4 mt-2">
                         <a href="{{ route('landing') }}">
