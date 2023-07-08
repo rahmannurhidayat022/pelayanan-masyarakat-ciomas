@@ -6,6 +6,12 @@
         <div class="container">
             <div class="card overflow-hidden mx-auto" style="max-width: 700px; border: none">
                 <div class="card-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{{ route('landing') }}">Beranda</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">List Kegiatan</li>
+                        </ol>
+                    </nav>
                     <div class="row mb-4">
                         <div class="col-12">
                             <a href="/kegiatan/1" class="row article">

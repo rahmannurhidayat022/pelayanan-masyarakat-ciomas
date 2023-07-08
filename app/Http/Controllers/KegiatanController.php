@@ -10,4 +10,9 @@ class KegiatanController extends Controller
     {
         return view('kegiatan');
     }
+
+    public function detail()
+    {
+        return view('detail_kegiatan');
+    }
 }

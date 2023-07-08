@@ -50,13 +50,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Beranda</a>
-                    <a href="index.html" class="nav-item nav-link">Kegiatan Desa</a>
+                    <a href="{{ route('landing') }}" class="nav-item nav-link {{ Route::currentRouteName() === 'landing' ? 'active' : '' }}">Beranda</a>
+                    <a href="{{ route('public.kegiatan') }}" class="nav-item nav-link {{ Route::currentRouteName() === 'public.kegiatan' ? 'active' : '' }}">Kegiatan Desa</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pelayanan</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Route::currentRouteName() === 'public.pengajuan' ? 'active' : (Route::currentRouteName() === 'public.pengaduan' ? 'active' : '') }}" data-bs-toggle="dropdown">Pelayanan</a>
                         <div class="dropdown-menu m-0">
-                            <a href="{{ route('public.pengajuan') }}" class="dropdown-item">Pengajuan Surat</a>
-                            <a href="{{ route('public.pengaduan') }}" class="dropdown-item">Pengaduan</a>
+                            <a href="{{ route('public.pengajuan') }}" class="dropdown-item {{ Route::currentRouteName() === 'public.pengajuan' ? 'active' : '' }}">Pengajuan Surat</a>
+                            <a href="{{ route('public.pengaduan') }}" class="dropdown-item {{ Route::currentRouteName() === 'public.pengaduan' ? 'active' : '' }}">Pengaduan</a>
                         </div>
                     </div>
                     <div class="nav-item d-flex align-items-center ms-5">
