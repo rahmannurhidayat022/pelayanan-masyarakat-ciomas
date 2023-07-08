@@ -1,20 +1,10 @@
 @extends('layouts.landing')
 @section('content')
+@section('title-page', 'Pengajuan Surat Desa Ciomas')
 <section class="wrapper">
     <div class="container-fluid">
         <div class="container">
             <div class="card overflow-hidden mx-auto" style="max-width: 700px;">
-                <div class="card-header">
-                    <!-- <nav aria-label="breadcrumb"> -->
-                    <!--     <ol class="breadcrumb"> -->
-                    <!--         <li class="breadcrumb-item"><a href="{{ route('landing') }}">Beranda</a></li> -->
-                    <!--         <li class="breadcrumb-item active" aria-current="page">Pengajuan Surat</li> -->
-                    <!--     </ol> -->
-                    <!-- </nav> -->
-                    <h3 class="card-title text-center h4 mt-4">
-                        Pengajuan Surat Desa Ciomas
-                    </h3>
-                </div>
                 <div class="card-body">
                     <div class="alert alert-primary">
                         Pastikan agar data yang diisikan susuai ketentuan dan valid, kesalahan data berisiko keterlambatan pembuatan surat.

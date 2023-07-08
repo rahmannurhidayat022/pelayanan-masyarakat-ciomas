@@ -17,6 +17,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', function () {
         return view('index');
     })->name('landing');
+    Route::get('/pengaduan', 'PengaduanController@index')->name('public.pengaduan');
+    Route::get('/kegiatan', 'KegiatanController@index')->name('public.kegiatan');
     Route::get('/pengajuan-surat', function () {
         return view('pengajuan');
     })->name('public.pengajuan');
