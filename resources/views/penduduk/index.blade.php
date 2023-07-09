@@ -33,6 +33,7 @@
                 <table id="kartu-keluarga-table" class="display" style="width:100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>No KK</th>
                             <th>Kepala Keluarga</th>
                             <th>Alamat</th>
@@ -90,7 +91,7 @@
         },
     })
 
-    $('#kartu-keluarga-table').DataTable({
+    const kkTable = $('#kartu-keluarga-table').DataTable({
         processing: true,
         serverSide: true,
         responsive: true,
@@ -99,6 +100,12 @@
             data: (res) => (console.log(res))
         },
         columns: [{
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
+            },
+            {
                 data: 'no_kk',
                 name: 'no_kk'
             },
@@ -113,6 +120,7 @@
             {
                 data: null,
                 name: null,
+                orderable: false,
                 render: (data, type, row) => {
                     return `
                 <a href="/penduduk/kartu-keluarga/${row.id}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
@@ -129,6 +137,52 @@
             url: "https://cdn.datatables.net/plug-ins/1.11.4/i18n/id.json"
         },
     })
+
+    function kkFormat(d) {
+        return (
+            '<dl>' +
+            '<dt>RT/RW:</dt>' +
+            '<dd>' +
+            d.rt_rw +
+            '</dd>' +
+            '</dd>' +
+            '<dt>Desa/kelurahan:</dt>' +
+            '<dd>' +
+            d.desa +
+            '</dd>' +
+            '<dt>Kecamatan:</dt>' +
+            '<dd>' +
+            d.kecamatan +
+            '</dd>' +
+            '<dt>Kabupaten/Kota:</dt>' +
+            '<dd>' +
+            d.kabupaten +
+            '</dd>' +
+            '<dt>Kode Pos:</dt>' +
+            '<dd>' +
+            d.kode_pos +
+            '</dd>' +
+            '<dt>Provinsi:</dt>' +
+            '<dd>' +
+            d.provinsi +
+            '</dd>' +
+            '<dt>Tanggal dicatat oleh sistem:</dt>' +
+            '<dd>' +
+            d.created_at +
+            '</dd>'
+        );
+    }
+
+    kkTable.on('click', 'td.dt-control', function(e) {
+        let tr = e.target.closest('tr');
+        let row = kkTable.row(tr);
+
+        if (row.child.isShown()) {
+            row.child.hide();
+        } else {
+            row.child(kkFormat(row.data())).show();
+        }
+    });
 </script>
 @endpush
 @endsection
