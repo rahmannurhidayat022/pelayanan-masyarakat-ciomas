@@ -33,5 +33,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::post('/auth/logout', 'UserController@logout')->name('auth.logout');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+        Route::prefix('penduduk')->group(function () {
+            Route::get('/', 'PendudukController@index')->name('penduduk.index');
+        });
     });
 });

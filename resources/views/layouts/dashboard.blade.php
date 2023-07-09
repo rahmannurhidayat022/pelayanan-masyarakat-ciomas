@@ -10,6 +10,7 @@
 
     <link href="img/favicon.ico" rel="icon">
     @include('includes.dashboard_head')
+    @stack('head')
 </head>
 
 <body>
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('dashboard') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="nav-item nav-link {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-handshake me-2"></i>Pelayanan</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -45,6 +46,7 @@
                         </div>
                     </div>
                     <a href="" class="nav-item nav-link"><i class="fa fa-book me-2"></i>Kegiatan Desa</a>
+                    <a href="{{ route('penduduk.index') }}" class="nav-item nav-link {{ Route::currentRouteName() === 'penduduk.index' ? 'active' : '' }}"><i class="fa fa-address-card me-2"></i>Data Penduduk</a>
                     <a href="" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Manajemen Akun</a>
                 </div>
             </nav>
@@ -87,7 +89,43 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <div id="notif" class="notif {{ session('success') ? 'show' : (session('error') ? 'show' : '') }}">
+        <div class="card">
+            <div class="card-body">
+                <div class="w-100 d-flex justify-content-center align-items-center p-3">
+                    @if (session('success'))
+                    <svg class="notif-icon icon-success" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                        <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                    </svg>
+                    @else
+                    <svg class="notif-icon icon-error" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                        <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                    </svg>
+                    @endif
+                </div>
+                <p class="text-center">
+                    @if(session('success'))
+                    {{ session('success') }}
+                    @elseif (session('error'))
+                    {{ session('error') }}
+                    @else
+                    Message tidak ada
+                    @endif
+                </p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @include('includes.dashboard_script')
+    <script>
+        console.log("{{ session('error') }}")
+        $('#notif button').click(function() {
+            $('#notif').removeClass('show');
+        })
+    </script>
+    @stack('script')
 </body>
 
 </html>

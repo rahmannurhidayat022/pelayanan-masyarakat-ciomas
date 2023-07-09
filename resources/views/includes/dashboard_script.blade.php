@@ -7,4 +7,5 @@
     <script src="{{ asset('assets/js/dashboard_lib/tempusdominus/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard_lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard_lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>

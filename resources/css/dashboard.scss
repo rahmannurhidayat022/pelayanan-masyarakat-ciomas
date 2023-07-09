@@ -275,3 +275,39 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+.notif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .7s, visibility 0s .7s;
+}
+.notif.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+.notif .card {
+    margin: 7x;
+    width: 100%;
+    max-width: 280px;
+}
+.notif svg.notif-icon {
+    font-size: 56px;
+}
+.icon-success {
+    fill: #198754;
+}
+.icon-error {
+    fill: #dc3545;
+}
