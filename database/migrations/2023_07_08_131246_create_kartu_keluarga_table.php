@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('kepala_keluarga');
             $table->integer('no_kk')->unique();
-            $table->text('alamat');
-            $table->string('rt_rw');
-            $table->string('desa')->default('Ciomas');
-            $table->string('kecamatan')->default('Panjalu');
-            $table->string('kabupaten')->default('Ciamis');
-            $table->integer('kode_pos')->default(46264);
-            $table->string('provinsi')->default('Jawa Barat');
+            $table->text('alamat')->nullable();
+            $table->string('rt_rw')->nullable();
+            $table->string('desa')->default('Ciomas')->nullable();
+            $table->string('kecamatan')->default('Panjalu')->nullable();
+            $table->string('kabupaten')->default('Ciamis')->nullable();
+            $table->integer('kode_pos')->default(46264)->nullable();
+            $table->string('provinsi')->default('Jawa Barat')->nullable();
             $table->timestamps();
         });
     }
