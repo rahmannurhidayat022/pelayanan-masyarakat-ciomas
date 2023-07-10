@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kartu_keluarga', function (Blueprint $table) {
             $table->id();
             $table->string('kepala_keluarga');
-            $table->integer('no_kk')->unique();
+            $table->bigInteger('no_kk')->unique();
             $table->text('alamat')->nullable();
             $table->string('rt_rw')->nullable();
             $table->string('desa')->default('Ciomas')->nullable();

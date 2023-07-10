@@ -11,6 +11,7 @@
                 <table id="penduduk-table" class="display" style="width:100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
@@ -49,7 +50,7 @@
 
 @push('script')
 <script>
-    $('#penduduk-table').DataTable({
+    const anggotaKeluargaTable = $('#penduduk-table').DataTable({
         processing: true,
         serverSide: true,
         responsive: true,
@@ -58,12 +59,18 @@
             data: (res) => (console.log(res))
         },
         columns: [{
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
+            },
+            {
                 data: 'nik',
                 name: 'nik'
             },
             {
-                data: 'name',
-                name: 'name',
+                data: 'nama',
+                name: 'nama',
             },
             {
                 data: 'jenis_kelamin',
@@ -84,12 +91,81 @@
             {
                 data: null,
                 name: null,
+                orderable: false,
+                render: (data, type, row) => {
+                    return `
+                <a href="/penduduk/anggota-keluarga/${row.id}/edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                <form class="d-inline" action="/penduduk/anggota-keluarga/${row.id}/destroy" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                </form>
+                `
+                }
             }
         ],
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.11.4/i18n/id.json"
         },
     })
+
+    function anggotaKeluargaFormat(d) {
+        return (
+            '<dl>' +
+            '<dt>Pendidikan:</dt>' +
+            '<dd>' +
+            d.pendidikan +
+            '</dd>' +
+            '</dd>' +
+            '<dt>Pekerjaan:</dt>' +
+            '<dd>' +
+            d.pekerjaan +
+            '</dd>' +
+            '<dt>Status Pernikahan:</dt>' +
+            '<dd>' +
+            d.status_pernikahan +
+            '</dd>' +
+            '<dt>Status Hubungan:</dt>' +
+            '<dd>' +
+            d.status_hubungan +
+            '</dd>' +
+            '<dt>Kewarganegaraan:</dt>' +
+            '<dd>' +
+            d.kewarganegaraan +
+            '</dd>' +
+            '<dt>No Paspor:</dt>' +
+            '<dd>' +
+            d.no_paspor +
+            '</dd>' +
+            '<dt>No KITAS/KITAP:</dt>' +
+            '<dd>' +
+            d.no_kitas +
+            '</dd>' +
+            '<dt>Nama Ayah:</dt>' +
+            '<dd>' +
+            d.nama_ayah +
+            '</dd>' +
+            '<dt>Nama Ibu:</dt>' +
+            '<dd>' +
+            d.nama_ibu +
+            '</dd>' +
+            '<dt>Tanggal dicatat oleh sistem:</dt>' +
+            '<dd>' +
+            d.created_at +
+            '</dd>'
+        );
+    }
+
+    anggotaKeluargaTable.on('click', 'td.dt-control', function(e) {
+        let tr = e.target.closest('tr');
+        let row = anggotaKeluargaTable.row(tr);
+
+        if (row.child.isShown()) {
+            row.child.hide();
+        } else {
+            row.child(anggotaKeluargaFormat(row.data())).show();
+        }
+    });
 
     const kkTable = $('#kartu-keluarga-table').DataTable({
         processing: true,

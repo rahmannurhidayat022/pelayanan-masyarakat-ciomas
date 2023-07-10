@@ -120,7 +120,9 @@
     </div>
     @include('includes.dashboard_script')
     <script>
-        console.log("{{ session('error') }}")
+        $('.select2').select2({
+            theme: 'bootstrap-5'
+        });
         $('#notif button').click(function() {
             $('#notif').removeClass('show');
         })

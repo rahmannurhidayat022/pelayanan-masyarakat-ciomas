@@ -20,7 +20,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->integer('nik')->unique();
+            $table->bigInteger('nik')->unique();
             $table->string('nama');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->string('tempat_lahir');
@@ -31,10 +31,10 @@ return new class extends Migration
             $table->string('status_pernikahan');
             $table->string('status_hubungan');
             $table->string('kewarganegaraan');
-            $table->string('no_paspor');
-            $table->string('no_kitas');
-            $table->string('nama_ayah');
-            $table->string('nama_ibu');
+            $table->string('no_paspor')->nullable();
+            $table->string('no_kitas')->nullable();
+            $table->string('nama_ayah')->nullable();
+            $table->string('nama_ibu')->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/js/dashboard_lib/chart/chart.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard_lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard_lib/waypoints/waypoints.min.js') }}"></script>

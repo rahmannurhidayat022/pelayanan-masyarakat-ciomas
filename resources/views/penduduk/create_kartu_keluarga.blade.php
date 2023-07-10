@@ -17,25 +17,25 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="no_kk" id="no_kk">No KK</label>
+                                <label for="no_kk">No KK</label>
                                 <input type="number" value="{{ old('no_kk')}}" class="form-control form-w-sm" id="no_kk" name="no_kk" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="kepala_keluarga" id="kepala_keluarga">Kepala Keluarga</label>
+                                <label for="kepala_keluarga">Kepala Keluarga</label>
                                 <input type="text" value="{{ old('kepala_keluarga')}}" class="form-control form-w-sm" id="kepala_keluarga" name="kepala_keluarga" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="rt_rw" id="rt_rw">RT/RW</label>
+                                <label for="rt_rw">RT/RW</label>
                                 <input type="text" value="{{ old('rt_rw')}}" class="form-control form-w-sm" id="rt_rw" name="rt_rw" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="alamat" id="alamat">Alamat</label>
+                                <label for="alamat">Alamat</label>
                                 <textarea class="form-control form-w-sm" id="alamat" name="alamat" required>
                                 {{ old('alamat') }}
                                 </textarea>
