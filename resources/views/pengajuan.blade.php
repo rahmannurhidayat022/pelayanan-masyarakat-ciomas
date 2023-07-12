@@ -184,12 +184,6 @@
                     $parent.addClass('d-none');
                 }
             })
-            // if (val === 'kk') {
-            //     $('#jenis').removeAttr('disabled').parent().removeClass('d-none');
-            //     $('#pengantar_rw').removeAttr('disabled').parent().removeClass('d-none');
-            //     $('#kk').removeAttr('disabled').parent().removeClass('d-none');
-            //     $('#ktp').removeAttr('disabled').parent().removeClass('d-none');
-            // }
         });
     })
 </script>
