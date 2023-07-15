@@ -15,12 +15,77 @@ use App\Models\PengajuanSKTM;
 use App\Models\PengajuanSKW;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class PengajuanController extends Controller
 {
     public function index()
     {
         return view('pengajuan');
+    }
+
+    public function dashIndex(Request $request)
+    {
+        if ($request->ajax()) {
+            $pengajuan_kk = PengajuanKK::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan KK' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_ktp = PengajuanKTP::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan KTP' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_akta = PengajuanAkta::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan Akta' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_sktm = PengajuanSKTM::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKTM' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skbm = PengajuanSKBM::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKBM' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skjd = PengajuanSKJD::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKJD' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skkb = PengajuanSKKB::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKKB' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skl = PengajuanSKL::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKL' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skm = PengajuanSKM::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKM' as jenis_pengajuan"))
+                ->get();
+
+            $pengajuan_skw = PengajuanSKW::with(['AnggotaKeluarga'])
+                ->select('*', DB::raw("'Pengajuan SKW' as jenis_pengajuan"))
+                ->get();
+
+
+            $data = $pengajuan_kk
+                ->concat($pengajuan_ktp)
+                ->concat($pengajuan_akta)
+                ->concat($pengajuan_sktm)
+                ->concat($pengajuan_skbm)
+                ->concat($pengajuan_skjd)
+                ->concat($pengajuan_skkb)
+                ->concat($pengajuan_skl)
+                ->concat($pengajuan_skm)
+                ->concat($pengajuan_skw)
+                ->sortByDesc('created_at')
+                ->values();
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+        }
+        return view('pengajuan.index');
     }
 
     public function store(Request $request)

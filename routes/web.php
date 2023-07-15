@@ -12,6 +12,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::prefix('pengajuan-surat')->group(function () {
         Route::get('/', 'PengajuanController@index')->name('public.pengajuan');
+        Route::get('/manage-pengajuan-surat', 'PengajuanController@dashIndex')->name('pengajuan.index');
     });
 
     Route::group(['middleware' => ['guest']], function () {
