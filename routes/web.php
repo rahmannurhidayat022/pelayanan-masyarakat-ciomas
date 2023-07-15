@@ -9,9 +9,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/pengaduan', 'PengaduanController@index')->name('public.pengaduan');
     Route::get('/kegiatan', 'KegiatanController@index')->name('public.kegiatan');
     Route::get('/kegiatan/{id}', 'KegiatanController@detail')->name('public.detail_kegiatan');
-    Route::get('/pengajuan-surat', function () {
-        return view('pengajuan');
-    })->name('public.pengajuan');
+
+    Route::prefix('pengajuan-surat')->group(function () {
+        Route::get('/', 'PengajuanController@index')->name('public.pengajuan');
+    });
 
     Route::group(['middleware' => ['guest']], function () {
         Route::get('/login', 'UserController@index')->name('login');
@@ -39,4 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/select2-kartu-keluarga', 'PendudukController@select2KartuKeluarga')->name('penduduk.select2KartuKeluarga');
         });
     });
+
+    Route::post('/store', 'PengajuanController@store')->name('public.pengajuan.store');
+    Route::get('/select2-anggota-keluarga', 'PendudukController@select2AnggotaKeluarga')->name('penduduk.select2AnggotaKeluarga');
 });

@@ -6,10 +6,20 @@
         <div class="container">
             <div class="card overflow-hidden mx-auto" style="max-width: 700px;">
                 <div class="card-body">
+                    @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @elseif (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @else
                     <div class="alert alert-primary">
                         Pastikan agar data yang diisikan susuai ketentuan dan valid, kesalahan data berisiko keterlambatan pembuatan surat.
                     </div>
-                    <form action="" method="">
+                    @endif
+                    <form action="{{ route('public.pengajuan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-md-6">
@@ -32,10 +42,8 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="mb-2">
-                                    <label class="form-label" for="nik">NIK</label>
-                                    <select class="select2 form-select w-100" id="nik" name="nik" required>
-                                        <option value="">Pilih</option>
-                                        <option value="ktp">KTP</option>
+                                    <label class="form-label" for="anggota_id">NIK</label>
+                                    <select class="select2 form-select w-100" id="anggota_id" name="anggota_id" required>
                                     </select>
                                     <small class="text-muted">NIK tidak tersedia? hubungi aparatur desa</small>
                                 </div>
@@ -69,7 +77,7 @@
                             </div>
                             <div class="mb-3 d-none">
                                 <label class="form-label" for="surat_bidan">Surat Bidan</label>
-                                <input type="file" class="form-control" id="surat_bidan" name="surat_bidan" disabled required>
+                                <input type="file" class="form-control" id="surat_bidan" name="surat_bidan" accept="image/png,image/jpg,image/jpeg,.pdf" disabled required>
                             </div>
                             <div class="mb-3 d-none">
                                 <label class="form-label" for="penghasilan">Penghasilan</label>
@@ -113,15 +121,24 @@
                             </div>
                             <div class="mb-3 d-none">
                                 <label class="form-label" for="pengantar_rw">Surat Pengantar RW</label>
-                                <input type="file" class="form-control" id="pengantar_rw" name="pengantar_rw" disabled required>
+                                <input type="file" class="form-control" id="pengantar_rw" name="pengantar_rw" accept="image/png,image/jpg,image/jpeg,.pdf" disabled required>
+                                @error('pengantar_rw')
+                                <small class='text-danger my-1'>{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="mb-3 d-none">
                                 <label class="form-label" for="kk">Kartu Keluarga</label>
-                                <input type="file" class="form-control" id="kk" name="kk" disabled required>
+                                <input type="file" class="form-control" id="kk" name="kk" accept="image/png,image/jpg,image/jpeg,.pdf" disabled required>
+                                @error('kk')
+                                <small class='text-danger my-1'>{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="mb-3 d-none">
                                 <label class="form-label" for="ktp">KTP</label>
-                                <input type="file" class="form-control" id="ktp" name="ktp" disabled required>
+                                <input type="file" class="form-control" id="ktp" name="ktp" accept="image/png,image/jpg,image/jpeg,.pdf" disabled required>
+                                @error('ktp')
+                                <small class='text-danger my-1'>{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="mt-4">
                                 <button type="reset" class="btn btn-secondary">Reset</button>
@@ -141,6 +158,19 @@
         $('.select2').select2({
             theme: 'bootstrap-5'
         });
+
+        $.ajax({
+            url: "{{ route('penduduk.select2AnggotaKeluarga') }}",
+            method: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                let html = '<option selected>Pilih</option>';
+                $.each(response, function(index, data) {
+                    html += `<option value="${data.id}">${data.nik} / ${data.nama}</option>`
+                });
+                $('#anggota_id').html(html);
+            }
+        })
 
         $('#tujuan').on('change', function() {
             const val = $(this).val();

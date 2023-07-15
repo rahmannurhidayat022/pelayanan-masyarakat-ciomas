@@ -36,6 +36,12 @@ class PendudukController extends Controller
         return response()->json($data);
     }
 
+    public function select2AnggotaKeluarga()
+    {
+        $data = AnggotaKeluarga::select('id', 'nik', 'nama')->get();
+        return response()->json($data);
+    }
+
     public function createAnggotaKeluarga()
     {
         return view('penduduk.create_anggota_keluarga');
