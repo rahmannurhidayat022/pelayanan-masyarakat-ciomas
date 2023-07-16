@@ -41,7 +41,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-handshake me-2"></i>Pelayanan</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="" class="dropdown-item">Pengajuan Surat</a>
+                            <a href="{{ route('pengajuan.index') }}" class="dropdown-item">Pengajuan Surat</a>
                             <a href="" class="dropdown-item">Pengaduan Masyarakat</a>
                         </div>
                     </div>

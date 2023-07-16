@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/download/{filename}', 'FileController@downloadFile')->name('download');
+
     Route::get('/', function () {
         return view('index');
     })->name('landing');
@@ -13,6 +15,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::prefix('pengajuan-surat')->group(function () {
         Route::get('/', 'PengajuanController@index')->name('public.pengajuan');
         Route::get('/manage-pengajuan-surat', 'PengajuanController@dashIndex')->name('pengajuan.index');
+        Route::get('/manage-pengajuan-surat/{id}', 'PengajuanController@detail')->name('pengajuan.detail');
     });
 
     Route::group(['middleware' => ['guest']], function () {

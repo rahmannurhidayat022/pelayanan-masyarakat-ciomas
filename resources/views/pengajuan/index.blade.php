@@ -48,6 +48,18 @@
             {
                 data: 'status',
                 name: 'status',
+                render: (data, type, row) => {
+                    let variant = 'text-secondary';
+                    if (data === "proses") {
+                        variant = 'text-primary'
+                    } else if (data === "disetujui") {
+                        variant = 'text-success'
+                    } else if (data === "ditolak") {
+                        variant = 'text-danger'
+                    }
+
+                    return `<span class="${variant}">${data}</span>`
+                }
             },
             {
                 data: 'created_at',
@@ -59,7 +71,7 @@
                 orderable: false,
                 render: (data, type, row) => {
                     return `
-                <a href="/penduduk/anggota-keluarga/${row.id}/edit" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
+                <a href="/pengajuan-surat/manage-pengajuan-surat/${row.id}?jenis_surat=${row.jenis_pengajuan}" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
                 <form class="d-inline" action="/penduduk/anggota-keluarga/${row.id}/destroy" method="POST">
                     @csrf
                     @method('DELETE')

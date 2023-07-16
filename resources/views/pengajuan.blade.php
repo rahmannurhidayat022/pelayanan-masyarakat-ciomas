@@ -43,9 +43,10 @@
                             <div class="col-12 col-md-6">
                                 <div class="mb-2">
                                     <label class="form-label" for="anggota_id">NIK</label>
-                                    <select class="select2 form-select w-100" id="anggota_id" name="anggota_id" required>
-                                    </select>
-                                    <small class="text-muted">NIK tidak tersedia? hubungi aparatur desa</small>
+                                    <input class="form-control w-100" type="text" id="anggota_id" name="anggota_id" placeholder="Nomor Induk Kependudukan" required>
+                                    <!-- <select class="select2 form-select w-100" id="anggota_id" name="anggota_id" required> -->
+                                    <!-- </select> -->
+                                    <!-- <small class="text-muted">NIK tidak tersedia? hubungi aparatur desa</small> -->
                                 </div>
                             </div>
                         </div>
@@ -159,18 +160,18 @@
             theme: 'bootstrap-5'
         });
 
-        $.ajax({
-            url: "{{ route('penduduk.select2AnggotaKeluarga') }}",
-            method: 'GET',
-            dataType: 'json',
-            success: (response) => {
-                let html = '<option selected>Pilih</option>';
-                $.each(response, function(index, data) {
-                    html += `<option value="${data.id}">${data.nik} / ${data.nama}</option>`
-                });
-                $('#anggota_id').html(html);
-            }
-        })
+        // $.ajax({
+        //     url: "{{ route('penduduk.select2AnggotaKeluarga') }}",
+        //     method: 'GET',
+        //     dataType: 'json',
+        //     success: (response) => {
+        //         let html = '<option selected>Pilih</option>';
+        //         $.each(response, function(index, data) {
+        //             html += `<option value="${data.id}">${data.nik} / ${data.nama}</option>`
+        //         });
+        //         $('#anggota_id').html(html);
+        //     }
+        // })
 
         $('#tujuan').on('change', function() {
             const val = $(this).val();

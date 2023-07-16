@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FileHandler\FileHandler;
+use App\Models\AnggotaKeluarga;
 use App\Models\PengajuanAkta;
 use App\Models\PengajuanKK;
 use App\Models\PengajuanKTP;
@@ -88,15 +89,57 @@ class PengajuanController extends Controller
         return view('pengajuan.index');
     }
 
+    public function detail(Request $request, $id)
+    {
+        $jenis_surat = $request->query('jenis_surat');
+
+        if ($jenis_surat && $id) {
+            if ($jenis_surat === "Pengajuan KK") {
+                $data = PengajuanKK::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan KTP") {
+                $data = PengajuanKTP::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan Akta") {
+                $data = PengajuanAkta::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKTM") {
+                $data = PengajuanSKTM::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKBM") {
+                $data = PengajuanSKBM::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKJD") {
+                $data = PengajuanSKJD::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKKB") {
+                $data = PengajuanSKKB::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKL") {
+                $data = PengajuanSKL::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKM") {
+                $data = PengajuanSKM::with('AnggotaKeluarga')->findOrFail($id);
+            } else if ($jenis_surat === "Pengajuan SKW") {
+                $data = PengajuanSKW::with('AnggotaKeluarga')->findOrFail($id);
+            } else {
+                return redirect()->back()->with('error', 'detail pengajuan tidak diketahui');
+            }
+        } else {
+            return redirect()->back()->with('error', 'detail pengajuan tidak diketahui');
+        }
+
+        return view('pengajuan.detail', compact('data'));
+    }
+
     public function store(Request $request)
     {
+        $anggotaKeluarga = AnggotaKeluarga::where('nik', $request->anggota_id)->first();
+        if ($anggotaKeluarga) {
+            $request['anggota_id'] = $anggotaKeluarga->id;
+        } else {
+            return redirect()->back()->with('error', 'NIK anda belum terdaftar di desa ciomas, silahkan hubungi aparatur desa');
+        }
+
         if ($request->input('tujuan') === 'kk') {
             $exists = PengajuanKK::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw') && $request->hasFile('kk') && $request->hasFile('ktp')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
-                    $kk = $request->file('kk')->store('public/files');
-                    $ktp = $request->file('ktp')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
+                    $kk = basename($request->file('kk')->store('public/files'));
+                    $ktp = basename($request->file('ktp')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'kk', 'ktp', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -115,8 +158,8 @@ class PengajuanController extends Controller
             $exists = PengajuanKTP::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw') && $request->hasFile('kk')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
-                    $kk = $request->file('kk')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
+                    $kk = basename($request->file('kk')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'kk', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -134,7 +177,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKTM::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -151,8 +194,8 @@ class PengajuanController extends Controller
             $exists = PengajuanAkta::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw') && $request->hasFile('surat_bidan')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
-                    $surat_bidan = $request->file('surat_bidan')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
+                    $surat_bidan = basename($request->file('surat_bidan')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'surat_bidan', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -170,7 +213,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKM::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -187,7 +230,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKL::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -204,7 +247,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKW::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -221,7 +264,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKKB::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -238,7 +281,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKBM::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
@@ -255,7 +298,7 @@ class PengajuanController extends Controller
             $exists = PengajuanSKJD::where('anggota_id', $request->input('anggota_id'))->where('status', 'proses')->exists();
             if (!$exists) {
                 if ($request->hasFile('pengantar_rw')) {
-                    $pengantar_rw = $request->file('pengantar_rw')->store('public/files');
+                    $pengantar_rw = basename($request->file('pengantar_rw')->store('public/files'));
 
                     $data = $request->except(['pengantar_rw', 'tujuan']);
                     $data['pengantar_rw'] = $pengantar_rw;
