@@ -43,6 +43,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/get-kartu-keluarga', 'PendudukController@getKartuKeluarga')->name('penduduk.getKartuKeluarga');
             Route::get('/select2-kartu-keluarga', 'PendudukController@select2KartuKeluarga')->name('penduduk.select2KartuKeluarga');
         });
+
+        Route::post('/surat-keluar', 'SuratKeluarController@store')->name('suratKeluar.store');
     });
 
     Route::post('/store', 'PengajuanController@store')->name('public.pengajuan.store');

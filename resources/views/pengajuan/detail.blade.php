@@ -22,6 +22,11 @@
                             <td><b>{{ $data->AnggotaKeluarga->nama }}</b></td>
                         </tr>
                         <tr>
+                            <td>NIK</td>
+                            <td>:</td>
+                            <td><b>{{ $data->AnggotaKeluarga->nik }}</b></td>
+                        </tr>
+                        <tr>
                             <td>Tempat/Tgl Lahir</td>
                             <td>:</td>
                             <td><b>{{ $data->AnggotaKeluarga->tempat_lahir }}, {{ $data->AnggotaKeluarga->tanggal_lahir }}</b></td>
@@ -180,16 +185,35 @@
                             <td>:</td>
                             <td><b>{{ $data->status }}</b></td>
                         </tr>
+                        @if($suratKeluar)
+                        <tr>
+                            <td colspan="3"><b>Surat Keluar</b></td>
+                        </tr>
+                        <tr>
+                            <td>No Surat</td>
+                            <td>:</td>
+                            <td><b>{{ $suratKeluar->no_surat }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Hasil Surat</td>
+                            <td>:</td>
+                            <td>
+                                <a href="{{ route('download', ['filename' => $suratKeluar->file]) }}" class="btn btn-info btn-sm text-white"><i class="fa fa-download me-1"></i>Unduh File</a>
+                            </td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-primary w-100 mb-1 mt-3" data-bs-toggle="modal" data-bs-target="#reply-surat" {{ $data->status !== 'proses' ? 'disabled' : '' }}>
+                @if ($data->status === 'proses')
+                <button type="button" class="btn btn-primary w-100 mb-1 mt-3" data-bs-toggle="modal" data-bs-target="#reply-surat">
                     <i class="fa fa-reply me-1"></i>
                     Submit Hasil Surat
                 </button>
-                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reject-surat" {{ $data->status !== 'proses' ? 'disabled' : '' }}>
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reject-surat">
                     <i class="fa fa-eject me-1"></i>
                     Tolak pengajuan
                 </button>
+                @endif
                 <div id="reply-surat" class="modal fade" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -197,20 +221,23 @@
                                 <h5 class="modal-title">Submit Hasil Surat</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="" method="POST">
+                            <form action="{{ route('suratKeluar.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="modal-body">
+                                    <input type="text" value="{{ $data->id }}" name="surat_id" hidden>
+                                    <input type="text" value="{{ request()->query('jenis_surat') }}" name="jenis_surat" hidden>
                                     <div class="mb-2">
                                         <label class="form-label" for="no_surat">No Surat</label>
                                         <input class="form-control" type="text" id="no_surat" name="no_surat">
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label" for="file">File</label>
-                                        <input class="form-control" type="file" id="file" name="file">
+                                        <input type="file" class="form-control" id="file" name="file" accept="image/png,image/jpg,image/jpeg,.pdf" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="button" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -233,7 +260,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="button" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>

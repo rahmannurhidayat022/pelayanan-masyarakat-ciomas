@@ -41,4 +41,14 @@ class PengajuanSKL extends Model
             get: fn (string $value) => ReformatDate::updateDateTimeTimezone($value),
         );
     }
+
+    public function suratKeluar()
+    {
+        return $this->morphOne(SuratKeluar::class, 'surat');
+    }
+
+    public function penolakan()
+    {
+        return $this->morphOne(Penolakan::class, 'surat');
+    }
 }

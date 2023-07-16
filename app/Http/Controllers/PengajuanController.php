@@ -14,6 +14,7 @@ use App\Models\PengajuanSKL;
 use App\Models\PengajuanSKM;
 use App\Models\PengajuanSKTM;
 use App\Models\PengajuanSKW;
+use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -121,7 +122,9 @@ class PengajuanController extends Controller
             return redirect()->back()->with('error', 'detail pengajuan tidak diketahui');
         }
 
-        return view('pengajuan.detail', compact('data'));
+        $suratKeluar = SuratKeluar::where('surat_id', $id)->where('jenis_surat', $jenis_surat)->first();
+
+        return view('pengajuan.detail', compact('data'), compact('suratKeluar'));
     }
 
     public function store(Request $request)
