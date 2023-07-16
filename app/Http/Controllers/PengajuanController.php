@@ -14,6 +14,7 @@ use App\Models\PengajuanSKL;
 use App\Models\PengajuanSKM;
 use App\Models\PengajuanSKTM;
 use App\Models\PengajuanSKW;
+use App\Models\Penolakan;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -123,8 +124,13 @@ class PengajuanController extends Controller
         }
 
         $suratKeluar = SuratKeluar::where('surat_id', $id)->where('jenis_surat', $jenis_surat)->first();
+        $reject = Penolakan::where('surat_id', $id)->where('jenis_surat', $jenis_surat)->first();
 
-        return view('pengajuan.detail', compact('data'), compact('suratKeluar'));
+        return view('pengajuan.detail', [
+            "data" => $data,
+            "suratKeluar" => $suratKeluar,
+            "reject" => $reject
+        ]);
     }
 
     public function store(Request $request)

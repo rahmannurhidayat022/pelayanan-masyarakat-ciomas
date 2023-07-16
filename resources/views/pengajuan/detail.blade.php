@@ -185,6 +185,11 @@
                             <td>:</td>
                             <td><b>{{ $data->status }}</b></td>
                         </tr>
+                        <tr>
+                            <td>Tanggal Pengajuan</td>
+                            <td>:</td>
+                            <td><b>{{ $data->created_at }}</b></td>
+                        </tr>
                         @if($suratKeluar)
                         <tr>
                             <td colspan="3"><b>Surat Keluar</b></td>
@@ -200,6 +205,26 @@
                             <td>
                                 <a href="{{ route('download', ['filename' => $suratKeluar->file]) }}" class="btn btn-info btn-sm text-white"><i class="fa fa-download me-1"></i>Unduh File</a>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Surat Keluar</td>
+                            <td>:</td>
+                            <td><b>{{ $suratKeluar->created_at }}</b></td>
+                        </tr>
+                        @endif
+                        @if($reject)
+                        <tr>
+                            <td colspan="3"><b>Penolakan Surat</b></td>
+                        </tr>
+                        <tr>
+                            <td>Pesan penolakan</td>
+                            <td>:</td>
+                            <td><b>{{ $reject->pesan }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal penolakan</td>
+                            <td>:</td>
+                            <td><b>{{ $reject->created_at }}</b></td>
                         </tr>
                         @endif
                     </tbody>
@@ -251,11 +276,14 @@
                                 <h5 class="modal-title">Penolakan Surat</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="" method="POST">
+                            <form action="{{ route('penolakan.store') }}" method="POST">
+                                @csrf
                                 <div class="modal-body">
+                                    <input type="text" value="{{ $data->id }}" name="surat_id" hidden>
+                                    <input type="text" value="{{ request()->query('jenis_surat') }}" name="jenis_surat" hidden>
                                     <div class="mb-2">
                                         <label class="form-label" for="pesan">Alasan penolakan</label>
-                                        <textarea class="form-control" type="text" id="no_surat" name="no_surat"></textarea>
+                                        <textarea class="form-control" type="text" id="pesan" name="pesan"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

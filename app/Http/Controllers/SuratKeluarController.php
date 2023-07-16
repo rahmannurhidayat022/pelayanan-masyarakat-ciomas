@@ -26,6 +26,7 @@ class SuratKeluarController extends Controller
             $surat_keluar = new SuratKeluar();
             $surat_keluar->surat_id = $request->input('surat_id');
             $surat_keluar->no_surat = $request->input('no_surat');
+            $surat_keluar->jenis_surat = $jenis_surat;
             $surat_keluar->file = $filename;
             $surat_keluar->save();
 

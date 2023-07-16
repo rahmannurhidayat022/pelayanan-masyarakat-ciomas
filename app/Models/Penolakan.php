@@ -9,7 +9,7 @@ class Penolakan extends Model
 {
     use HasFactory;
     protected $table = 'penolakan';
-    protected $fillable = ['surat_id', 'pesan'];
+    protected $fillable = ['surat_id', 'pesan', 'jenis_surat'];
 
     public function surat()
     {

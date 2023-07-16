@@ -45,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::post('/surat-keluar', 'SuratKeluarController@store')->name('suratKeluar.store');
+        Route::post('/reject-surat', 'PenolakanController@store')->name('penolakan.store');
     });
 
     Route::post('/store', 'PengajuanController@store')->name('public.pengajuan.store');

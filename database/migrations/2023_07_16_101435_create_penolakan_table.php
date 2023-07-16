@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('surat_id');
             $table->text('pesan');
+            $table->string('jenis_surat');
             $table->timestamps();
         });
     }
