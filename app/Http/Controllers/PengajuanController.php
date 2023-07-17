@@ -19,6 +19,7 @@ use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Database\Eloquent\Builder;
 
 class PengajuanController extends Controller
 {
@@ -323,5 +324,39 @@ class PengajuanController extends Controller
         }
 
         return redirect()->back()->with('success', 'Permintaan anda akan kami proses');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            $jenis_surat = $request->jenis_surat;
+            if ($jenis_surat === "Pengajuan KK") {
+                PengajuanKK::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan KTP") {
+                PengajuanKTP::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan Akta") {
+                PengajuanAkta::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKTM") {
+                PengajuanSKTM::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKBM") {
+                PengajuanSKBM::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKJD") {
+                PengajuanSKJD::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKKB") {
+                PengajuanSKKB::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKL") {
+                PengajuanSKL::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKM") {
+                PengajuanSKM::findOrFail($id)->delete();
+            } else if ($jenis_surat === "Pengajuan SKW") {
+                PengajuanSKW::findOrFail($id)->delete();
+            } else {
+                return redirect()->back()->with('error', 'detail pengajuan tidak diketahui');
+            }
+
+            return redirect()->back()->with('success', 'data pengajuan berhasil terhapus');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'data pengajuan gagal terhapus');
+        }
     }
 }

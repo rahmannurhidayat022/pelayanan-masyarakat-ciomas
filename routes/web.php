@@ -16,6 +16,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/', 'PengajuanController@index')->name('public.pengajuan');
         Route::get('/manage-pengajuan-surat', 'PengajuanController@dashIndex')->name('pengajuan.index');
         Route::get('/manage-pengajuan-surat/{id}', 'PengajuanController@detail')->name('pengajuan.detail');
+        Route::delete('/{id}/destroy', 'PengajuanController@destroy')->name('pengajuan.destroy');
     });
 
     Route::group(['middleware' => ['guest']], function () {
