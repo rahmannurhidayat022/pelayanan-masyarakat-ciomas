@@ -50,5 +50,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     Route::post('/store', 'PengajuanController@store')->name('public.pengajuan.store');
+    Route::post('/pengajuan-surat/tracking', 'PengajuanController@tracking')->name('public.pengajuan.tracking');
     Route::get('/select2-anggota-keluarga', 'PendudukController@select2AnggotaKeluarga')->name('penduduk.select2AnggotaKeluarga');
 });

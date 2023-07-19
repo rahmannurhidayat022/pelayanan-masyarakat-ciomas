@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="ciomas website" name="keywords">
     <meta content="ciomas website" name="description">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- <link href="img/favicon.ico" rel="icon"> -->
     @include('includes.landing_head')

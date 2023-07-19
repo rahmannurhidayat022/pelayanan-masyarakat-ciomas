@@ -20,12 +20,96 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class PengajuanController extends Controller
 {
     public function index()
     {
         return view('pengajuan');
+    }
+
+    public function tracking(Request $request)
+    {
+        try {
+            $nik = $request->nik_pengaju;
+            $pengajuanKK = PengajuanKK::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan KK' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanKTP = PengajuanKTP::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan KTP' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanAkta = PengajuanAkta::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan Akta' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKTM = PengajuanSKTM::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKTM' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKBM = PengajuanSKBM::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKBM' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKJD = PengajuanSKJD::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKJD' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKKB = PengajuanSKKB::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKKB' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKL = PengajuanSKL::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKL' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKM = PengajuanSKM::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKM' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $pengajuanSKW = PengajuanSKW::whereHas('anggotaKeluarga', function ($query) use ($nik) {
+                $query->where('nik', $nik);
+            })->select('*', DB::raw("'Pengajuan SKW' as jenis_pengajuan"))->with('anggotaKeluarga')->get();
+
+            $data = Collection::make()
+                ->concat($pengajuanKK)
+                ->concat($pengajuanKTP)
+                ->concat($pengajuanAkta)
+                ->concat($pengajuanSKTM)
+                ->concat($pengajuanSKBM)
+                ->concat($pengajuanSKJD)
+                ->concat($pengajuanSKKB)
+                ->concat($pengajuanSKL)
+                ->concat($pengajuanSKM)
+                ->concat($pengajuanSKW)
+                ->sortByDesc('created_at')
+                ->values();
+
+            $data->each(function ($item) {
+                if ($item->status === 'disetujui') {
+                    $suratKeluar = SuratKeluar::where('surat_id', $item->id)->first();
+                    $item->file = $suratKeluar ? $suratKeluar->file : null;
+                    $item->pesan = null;
+                } else if ($item->status === 'ditolak') {
+                    $penolakan = Penolakan::where('surat_id', $item->id)->first();
+                    $item->file = $penolakan ? $penolakan->file : null;
+                    $item->pesan = $penolakan ? $penolakan->pesan : null;
+                } else {
+                    $item->file = null;
+                    $item->pesan = null;
+                }
+            });
+
+            if (count($data) > 0) {
+                return response()->json(['status' => true, 'message' => '', 'data' => $data]);
+            } else {
+                return response()->json(['status' => true, 'message' => 'Anda belum pernah mengajukan surat', 'data' => []]);
+            }
+        } catch (\Throwable $th) {
+            return abort(500, 'Server Error');
+        }
     }
 
     public function dashIndex(Request $request)
