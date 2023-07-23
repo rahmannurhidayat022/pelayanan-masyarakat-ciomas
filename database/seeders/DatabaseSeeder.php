@@ -26,5 +26,31 @@ class DatabaseSeeder extends Seeder
             'username' => 'viewer',
             'password' => 'viewer123',
         ]);
+        // \App\Models\AnggotaKeluarga::factory()->create([
+        //     'kk_id' => \App\Models\KartuKeluarga::factory()->create([
+        //         'kepala_keluarga' => 'Edi Suhandi',
+        //         'no_kk' => '1000230082912',
+        //         'alamat' => 'Bandung',
+        //         'rt_rw' => '012/010',
+        //         'desa' => 'Kebonjayanti',
+        //         'kecamatan' => 'KiaraCondong',
+        //         'kabupaten' => 'Kota Bandung',
+        //         'kode_pos' => '45443',
+        //         'provinsi' => 'Jawa Barat',
+        //     ]),
+        //     'nik' => '20012378729101',
+        //     'nama' => 'Mulyadi',
+        //     'jenis_kelamin' => 'laki-laki',
+        //     'tempat_lahir' => 'Bandung',
+        //     'tanggal_lahir' => '2001-07-12',
+        //     'agama' => 'Islam',
+        //     'pendidikan' => 'SD',
+        //     'pekerjaan' => 'Wiraswasta',
+        //     'status_pernikahan' => 'Belum menikah',
+        //     'status_hubungan' => 'Anak',
+        //     'kewarganegaraan' => 'WNI',
+        //     'nama_ayah' => 'Edi Suhandi',
+        //     'nama_ibu' => 'Emii'
+        // ]);
     }
 }

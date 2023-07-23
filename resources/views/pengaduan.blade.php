@@ -5,8 +5,17 @@
     <div class="container-fluid">
         <div class="container">
             <div class="card overflow-hidden mx-auto" style="max-width: 700px;">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @elseif (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="card-body">
-                    <form action="" method="">
+                    <form action="{{ route('public.pengaduan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="mb-3">
@@ -18,6 +27,10 @@
                                 <input type="text" class="form-control" id="nama" name="nama" required>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label" for="telp">No Telepon</label>
+                                <input type="text" class="form-control" id="telp" name="telp" required>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="judul">Judul</label>
                                 <input type="text" class="form-control" id="judul" name="judul" required>
                             </div>
@@ -26,8 +39,8 @@
                                 <textarea class="form-control" id="pesan" name="pesan" required></textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="file">Berkas</label>
-                                <input type="file" class="form-control" id="file" name="file">
+                                <label class="form-label" for="image">Berkas</label>
+                                <input type="file" class="form-control" id="image" name="image">
                             </div>
                             <div class="mt-4">
                                 <button type="reset" class="btn btn-secondary">Reset</button>

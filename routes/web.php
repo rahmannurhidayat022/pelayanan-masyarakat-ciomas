@@ -47,9 +47,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::post('/surat-keluar', 'SuratKeluarController@store')->name('suratKeluar.store');
         Route::post('/reject-surat', 'PenolakanController@store')->name('penolakan.store');
+
+        Route::get('/pengaduan/list', 'PengaduanController@datatable')->name('pengaduan.index');
+        Route::put('/pengaduan/list/{id}/update', 'PengaduanController@changeIsRead')->name('pengaduan.update');
+        Route::delete('/pengaduan/list/{id}/destroy', 'PengaduanController@destroy')->name('pengaduan.destroy');
     });
 
     Route::post('/store', 'PengajuanController@store')->name('public.pengajuan.store');
     Route::post('/pengajuan-surat/tracking', 'PengajuanController@tracking')->name('public.pengajuan.tracking');
     Route::get('/select2-anggota-keluarga', 'PendudukController@select2AnggotaKeluarga')->name('penduduk.select2AnggotaKeluarga');
+    Route::post('/pengaduan/store', 'PengaduanController@store')->name('public.pengaduan.store');
 });

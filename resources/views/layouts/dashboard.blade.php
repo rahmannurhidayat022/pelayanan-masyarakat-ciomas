@@ -42,7 +42,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-handshake me-2"></i>Pelayanan</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('pengajuan.index') }}" class="dropdown-item">Pengajuan Surat</a>
-                            <a href="" class="dropdown-item">Pengaduan Masyarakat</a>
+                            <a href="{{ route('pengaduan.index') }}" class="dropdown-item">Pengaduan Masyarakat</a>
                         </div>
                     </div>
                     <a href="" class="nav-item nav-link"><i class="fa fa-book me-2"></i>Kegiatan Desa</a>
