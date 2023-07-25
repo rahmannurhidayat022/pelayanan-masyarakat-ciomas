@@ -29,6 +29,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/auth/logout', 'UserController@logout')->name('auth.logout');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+        Route::prefix('/account')->group(function () {
+            Route::get('/', 'UserController@accountList')->name('account.index');
+            Route::post('/store', 'UserController@store')->name('account.store');
+            Route::get('/{id}/edit', 'UserController@edit')->name('account.edit');
+            Route::put('/{id}/update', 'UserController@update')->name('account.update');
+            Route::delete('/{id}/destroy', 'UserController@destroy')->name('account.destroy');
+        });
+
         Route::prefix('penduduk')->group(function () {
             Route::get('/', 'PendudukController@index')->name('penduduk.index');
             Route::get('/anggota-keluarga/create', 'PendudukController@createAnggotaKeluarga')->name('penduduk.create_anggota_keluarga');

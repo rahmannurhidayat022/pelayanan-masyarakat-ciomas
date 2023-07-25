@@ -47,7 +47,7 @@
                     </div>
                     <a href="" class="nav-item nav-link"><i class="fa fa-book me-2"></i>Kegiatan Desa</a>
                     <a href="{{ route('penduduk.index') }}" class="nav-item nav-link {{ Route::currentRouteName() === 'penduduk.index' ? 'active' : '' }}"><i class="fa fa-address-card me-2"></i>Data Penduduk</a>
-                    <a href="" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Manajemen Akun</a>
+                    <a href="{{ route('account.index') }}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Manajemen Akun</a>
                 </div>
             </nav>
         </div>
