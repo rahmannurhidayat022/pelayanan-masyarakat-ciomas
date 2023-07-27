@@ -29,6 +29,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/auth/logout', 'UserController@logout')->name('auth.logout');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+        Route::prefix('admin/kegiatan')->group(function () {
+            Route::get('/', 'KegiatanController@adminIndex')->name('kegiatan.index');
+            Route::get('/create', 'KegiatanController@create')->name('kegiatan.create');
+            Route::get('/{id}/edit', 'KegiatanController@edit')->name('kegiatan.edit');
+            Route::get('/{id}/preview', 'KegiatanController@preview')->name('kegiatan.preview');
+            Route::post('/store', 'KegiatanController@store')->name('kegiatan.store');
+            Route::put('/{id}/update', 'KegiatanController@update')->name('kegiatan.update');
+            Route::delete('/{id}/destroy', 'KegiatanController@destroy')->name('kegiatan.destroy');
+        });
+
         Route::prefix('/account')->group(function () {
             Route::get('/', 'UserController@accountList')->name('account.index');
             Route::post('/store', 'UserController@store')->name('account.store');
