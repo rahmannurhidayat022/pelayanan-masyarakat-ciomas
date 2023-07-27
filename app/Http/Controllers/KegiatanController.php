@@ -12,12 +12,14 @@ class KegiatanController extends Controller
 {
     public function index()
     {
-        return view('kegiatan');
+        $data = Kegiatan::paginate(5);
+        return view('kegiatan', compact('data'));
     }
 
-    public function detail()
+    public function detail($slug)
     {
-        return view('detail_kegiatan');
+        $data = Kegiatan::where('slug', $slug)->first();
+        return view('detail_kegiatan', compact('data'));
     }
 
     public function adminIndex(Request $request)

@@ -10,7 +10,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     })->name('landing');
     Route::get('/pengaduan', 'PengaduanController@index')->name('public.pengaduan');
     Route::get('/kegiatan', 'KegiatanController@index')->name('public.kegiatan');
-    Route::get('/kegiatan/{id}', 'KegiatanController@detail')->name('public.detail_kegiatan');
+    Route::get('/kegiatan/{slug}', 'KegiatanController@detail')->name('public.detail_kegiatan');
 
     Route::prefix('pengajuan-surat')->group(function () {
         Route::get('/', 'PengajuanController@index')->name('public.pengajuan');
