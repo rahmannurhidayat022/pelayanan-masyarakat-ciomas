@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/download/{filename}', 'FileController@downloadFile')->name('download');
 
-    Route::get('/', function () {
-        return view('index');
-    })->name('landing');
+    Route::get('/', 'LandingController@index')->name('landing');
     Route::get('/pengaduan', 'PengaduanController@index')->name('public.pengaduan');
     Route::get('/kegiatan', 'KegiatanController@index')->name('public.kegiatan');
     Route::get('/kegiatan/{slug}', 'KegiatanController@detail')->name('public.detail_kegiatan');

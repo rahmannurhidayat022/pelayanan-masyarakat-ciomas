@@ -84,7 +84,9 @@
                         <tr>
                             <td>Surat Bidan</td>
                             <td>:</td>
-                            <td><b>{{ $data->surat_bidan }}</b></td>
+                            <td>
+                                <a href="{{ route('download', ['filename' => $data->pengantar_rw]) }}" class="btn btn-info btn-sm text-white"><i class="fa fa-download me-1"></i>Unduh File</a>
+                            </td>
                         </tr>
                         @endif
                         @if ($data->penghasilan)
@@ -170,14 +172,18 @@
                         <tr>
                             <td>Kartu Keluarga</td>
                             <td>:</td>
-                            <td><b>{{ $data->kk }}</b></td>
+                            <td>
+                                <a href="{{ route('download', ['filename' => $data->kk]) }}" class="btn btn-info btn-sm text-white"><i class="fa fa-download me-1"></i>Unduh File</a>
+                            </td>
                         </tr>
                         @endif
                         @if ($data->ktp)
                         <tr>
                             <td>KTP</td>
                             <td>:</td>
-                            <td><b>{{ $data->ktp }}</b></td>
+                            <td>
+                                <a href="{{ route('download', ['filename' => $data->ktp]) }}" class="btn btn-info btn-sm text-white"><i class="fa fa-download me-1"></i>Unduh File</a>
+                            </td>
                         </tr>
                         @endif
                         <tr>

@@ -6,18 +6,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @elseif (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                    @endif
+
                 </div>
                 <div class="col-12">
                     <div class="card overflow-hidden mx-auto mb-4" style="max-width: 800px;">
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @elseif (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
                         <div class="card-body">
                             <h2 class="h5 text-uppercase">Lacak Pengajuan Surat</h2>
                             <form action="" method="POST">

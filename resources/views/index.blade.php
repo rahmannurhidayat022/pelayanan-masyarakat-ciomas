@@ -26,7 +26,7 @@
                     </div>
                     <div class="ps-4">
                         <h5 class="text-white mb-0">Total Penduduk</h5>
-                        <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                        <h1 class="text-white mb-0" data-toggle="counter-up">{{ $totalPenduduk }}</h1>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="ps-4">
                         <h5 class="text-primary mb-0">Jumlah Pengajuan</h5>
-                        <h1 class="mb-0" data-toggle="counter-up">12345</h1>
+                        <h1 class="mb-0" data-toggle="counter-up">{{ $totalPengajuan }}</h1>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="ps-4">
                         <h5 class="text-white mb-0">Jumlah Pengaduan</h5>
-                        <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                        <h1 class="text-white mb-0" data-toggle="counter-up">{{ $totalPengaduan }}</h1>
                     </div>
                 </div>
             </div>
@@ -174,6 +174,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mt-5">
+            <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46208.18726619761!2d108.26140944987624!3d-7.153107504791365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f442c4d8761fd%3A0xbb430877100efd88!2sCiomas%2C%20Kec.%20Panjalu%2C%20Kabupaten%20Ciamis%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1691305549849!5m2!1sid!2sid" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </div>
